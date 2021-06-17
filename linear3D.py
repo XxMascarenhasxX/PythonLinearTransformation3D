@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#ROTATION MATRIX FOR X AXIS
 def rotateX(p, ang):
     m_rot = np.array([ 
         [1,0,0],
@@ -12,7 +13,7 @@ def rotateX(p, ang):
 
     return rot
 
-
+#ROTATION MATRIX FOR Y AXIS
 def rotateY(p, ang):
     m_rot = np.array([ 
         [np.cos(np.deg2rad(ang)), 0, -np.sin(np.deg2rad(ang))],
@@ -24,6 +25,7 @@ def rotateY(p, ang):
 
     return rot
 
+#ROTATION MATRIX FOR Z AXIS
 def rotateZ(p, ang):
     m_rot = np.array([ 
         [np.cos(np.deg2rad(ang)), -np.sin(np.deg2rad(ang)),0],
@@ -35,54 +37,57 @@ def rotateZ(p, ang):
 
     return rot
 
-def girar_figura(figura, _angulo_rotacao):
-    for i in range(len(figura)):
-        vetor = rotateZ(figura[i], _angulo_rotacao)
+#ROTATING EVERY VECTOR IN THE FIGURE, ON THE Z AXIS
+#IF YOU WISH TO CHANGE THE DIRECTION, CHANGE THE ROTATE FUNCTION IN LINE 44
+def rotate_figure(figure, _angulo_rotacao):
+    for i in range(len(figure)):
+        vetor = rotateZ(figure[i], _angulo_rotacao)
         ax.plot(vetor[0], vetor[1], vetor[2], 'k-')
-        figura[i] = vetor
+        figure[i] = vetor
 
+#CONNECT TWO VECTORS AND PLOT THE LINE
 def connectPoints(p_0, p_1):
     x1, x2 = p_0[0], p_1[0]
     y1, y2 = p_0[1], p_1[1]
     z1, z2 = p_0[2], p_1[2]
 
-    #Linhas Coloridas Aleatoriamente
+    #Random Collored Lines
     ax.plot([x1, x2], [y1, y2], [z1, z2], 'k-')
-    #Linhas Pretas
+    #Black Lines
     #ax.plot([x1, x2], [y1, y2], [z1, z2], 'k-')
 
-def createCubo():
-    #CUBO CENTRALIZADO
-    connectPoints(cubo[0], cubo[1])
-    connectPoints(cubo[0], cubo[3])
-    connectPoints(cubo[0], cubo[4])
-    connectPoints(cubo[1], cubo[2])
-    connectPoints(cubo[1], cubo[5])
-    connectPoints(cubo[2], cubo[3])
-    connectPoints(cubo[2], cubo[6])
-    connectPoints(cubo[3], cubo[7])
-    connectPoints(cubo[4], cubo[5])
-    connectPoints(cubo[4], cubo[7])
-    connectPoints(cubo[5], cubo[6])
-    connectPoints(cubo[6], cubo[7])
+def createCube():
+    #CENTRALIZED CUBE
+    connectPoints(cube[0], cube[1])
+    connectPoints(cube[0], cube[3])
+    connectPoints(cube[0], cube[4])
+    connectPoints(cube[1], cube[2])
+    connectPoints(cube[1], cube[5])
+    connectPoints(cube[2], cube[3])
+    connectPoints(cube[2], cube[6])
+    connectPoints(cube[3], cube[7])
+    connectPoints(cube[4], cube[5])
+    connectPoints(cube[4], cube[7])
+    connectPoints(cube[5], cube[6])
+    connectPoints(cube[6], cube[7])
 
-    #CUBO DESCENTRALIZADO
-    #connectPoints(cubo[0], cubo[1])
-    #connectPoints(cubo[0], cubo[2])
-    #connectPoints(cubo[0], cubo[4])
-    #connectPoints(cubo[1], cubo[5])
-    #connectPoints(cubo[1], cubo[3])
-    #connectPoints(cubo[2], cubo[3])
-    #connectPoints(cubo[2], cubo[6])
-    #connectPoints(cubo[3], cubo[7])
-    #connectPoints(cubo[4], cubo[5])
-    #connectPoints(cubo[4], cubo[6])
-    #connectPoints(cubo[5], cubo[7])
-    #connectPoints(cubo[6], cubo[7])
+    #DECENTRALIZED CUBE
+    #connectPoints(cube[0], cube[1])
+    #connectPoints(cube[0], cube[2])
+    #connectPoints(cube[0], cube[4])
+    #connectPoints(cube[1], cube[5])
+    #connectPoints(cube[1], cube[3])
+    #connectPoints(cube[2], cube[3])
+    #connectPoints(cube[2], cube[6])
+    #connectPoints(cube[3], cube[7])
+    #connectPoints(cube[4], cube[5])
+    #connectPoints(cube[4], cube[6])
+    #connectPoints(cube[5], cube[7])
+    #connectPoints(cube[6], cube[7])
 
 def createTesseract():
     #TESSERACT
-    #CUBO EXTERNO
+    #EXTERNAL CUBE
     connectPoints(tesseract[0], tesseract[1])
     connectPoints(tesseract[0], tesseract[3])
     connectPoints(tesseract[0], tesseract[4])
@@ -95,7 +100,7 @@ def createTesseract():
     connectPoints(tesseract[4], tesseract[7])
     connectPoints(tesseract[5], tesseract[6])
     connectPoints(tesseract[6], tesseract[7])
-    #CUBO INTERNO
+    #INTERNAL CUBE
     connectPoints(tesseract[0+8], tesseract[1+8])
     connectPoints(tesseract[0+8], tesseract[3+8])
     connectPoints(tesseract[0+8], tesseract[4+8])
@@ -108,7 +113,7 @@ def createTesseract():
     connectPoints(tesseract[4+8], tesseract[7+8])
     connectPoints(tesseract[5+8], tesseract[6+8])
     connectPoints(tesseract[6+8], tesseract[7+8])
-    #CONEXÃO
+    #CONNECTION
     connectPoints(tesseract[0], tesseract[8])
     connectPoints(tesseract[1], tesseract[9])
     connectPoints(tesseract[2], tesseract[10])
@@ -118,8 +123,8 @@ def createTesseract():
     connectPoints(tesseract[6], tesseract[14])
     connectPoints(tesseract[7], tesseract[15])
 
-#CUBO DESCENTRALIZADO
-#cubo = [
+#DECENTRALIZED CUBE
+#cube = [
 #    [1, 1, 1], #0
 #    [1, 6, 1], #1
 #    [6, 1, 1], #2
@@ -130,8 +135,8 @@ def createTesseract():
 #    [6, 6, 6]  #7
 #]
 
-#CUBO CENTRALIZADO
-cubo = [
+#CENTRALIZED CUBE
+cube = [
     [2, -2, -2], #0
     [-2, -2, -2], #1
     [-2, 2, -2], #2
@@ -142,7 +147,7 @@ cubo = [
     [2, 2, 2]  #7
 ]
 
-#TESSERACT CENTRALIZADO
+#CENTRALIZED TESSERACT
 tesseract = [
     [2, -2, -2], #0
     [-2, -2, -2], #1
@@ -169,28 +174,24 @@ ax.set_ylim([-5,5])
 ax.set_zlim([-5,5])
 
 createTesseract()
-#createCubo()
+#createCube()
 #plt.show()
 
-''' DEBUG
-printed = False
-print(len(ax.lines))
+
+'''
+    THIS PART KEEPS DRAWING AND ROTATING THE CUBE/TESSERACT
+    IF YOU WISH DO DRAW ONE OR THE OTHER, COMMENT THE LINES REGARDING TO EACH
+    AS OF NOW, THE LINES REGARDING TO THE SIMPLE CUBE AR COMMENTED
 '''
 while True:
-    #girar_figura(cubo, 5)
-    #createCubo()
+    #rotate_figure(cube, 5)
+    #createCube()
 
-    girar_figura(tesseract, 5)
+    rotate_figure(tesseract, 5)
     createTesseract()
     plt.draw()
     
-    ''' DEBUG
-    if (printed == False):
-        print(len(ax.lines))
-        printed = True
-    '''
-    
-    #FOR CUBO
+    #FOR Cube
     #for i in range(len(ax.lines)-13, 0, -1):
     #    ax.lines.remove(ax.lines[i])
 
