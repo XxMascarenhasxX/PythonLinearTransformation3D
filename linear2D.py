@@ -1,6 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+'''
+    This was just an activity from college where my linear
+    algebra professor asked us to rotate an image 90 degrees 
+    and double its size but only in the Y axis
+'''
+
+
 #ROTATION MATRIX FOR X AXIS
 def rotateX(p, ang):
     m_rot = np.array([ 
@@ -78,7 +85,7 @@ for frames in range(0, 90):
     plt.pause(0.0001)
 
 for newFrames in range(0, 90):
-    increase_figure(arrow, 1.01)
+    increase_figure(arrow, 1.01) #This is where i got it wrong. I should've multiplied matrix x matrix, and the increasing one should be [[1,0], [0,2]] so i'd maintain X while increasing Y
     CreateArrow(arrow)
     plt.draw()
     
